@@ -60,7 +60,7 @@ function App() {
       setWinner(null);
       setWinningLine(null);
     }
-  }, [state]);
+  }, [state, winner]);
 
   // Minimax algorithm
   function minimax(board: any[], depth: number, isMaximizing: boolean): { score: number, move: number | null } {
@@ -136,7 +136,7 @@ function App() {
         setCurrentTurn('X');
       }, 500);
     }
-  }, [mode, currentTurn, state, winner, difficulty]);
+  }, [mode, currentTurn, state, winner, difficulty, minimax]);
 
   const handleBlockClick= (index:number) => {
     if (state[index] !== null || winner) return;
