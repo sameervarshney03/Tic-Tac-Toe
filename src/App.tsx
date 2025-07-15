@@ -2,6 +2,59 @@ import React , {useState, useEffect} from 'react';
 import './App.css';
 import Block from './components/block';
 
+// Minimax algorithm (move outside App component)
+function minimax(board: any[], depth: number, isMaximizing: boolean): { score: number, move: number | null } {
+  const win = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6],
+  ];
+  const checkWinner = (state: (string | null)[]): {winner: string | null, line: number[] | null} => {
+    for (let i = 0; i < win.length; i++) {
+      const [a, b, c] = win[i];
+      if (board[a] !== null && board[a] === board[b] && board[a] === board[c]) {
+        return { winner: board[a], line: [a, b, c] };
+      }
+    }
+    return { winner: null, line: null };
+  };
+  const result = checkWinner(board);
+  if (result.winner === 'O') return { score: 10 - depth, move: null };
+  if (result.winner === 'X') return { score: depth - 10, move: null };
+  if (board.every(cell => cell !== null)) return { score: 0, move: null };
+
+  let bestMove: number | null = null;
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (board[i] === null) {
+        board[i] = 'O';
+        const { score } = minimax(board, depth + 1, false);
+        board[i] = null;
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = i;
+        }
+      }
+    }
+    return { score: bestScore, move: bestMove };
+  } else {
+    let bestScore = Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (board[i] === null) {
+        board[i] = 'X';
+        const { score } = minimax(board, depth + 1, true);
+        board[i] = null;
+        if (score < bestScore) {
+          bestScore = score;
+          bestMove = i;
+        }
+      }
+    }
+    return { score: bestScore, move: bestMove };
+  }
+}
+
 function App() {
   const [state , setState] = useState(Array(9).fill(null));
   const [currentTurn, setCurrentTurn] = useState("X");
@@ -62,45 +115,6 @@ function App() {
     }
   }, [state, winner]);
 
-  // Minimax algorithm
-  function minimax(board: any[], depth: number, isMaximizing: boolean): { score: number, move: number | null } {
-    const result = checkWinner(board);
-    if (result.winner === 'O') return { score: 10 - depth, move: null };
-    if (result.winner === 'X') return { score: depth - 10, move: null };
-    if (board.every(cell => cell !== null)) return { score: 0, move: null };
-
-    let bestMove: number | null = null;
-    if (isMaximizing) {
-      let bestScore = -Infinity;
-      for (let i = 0; i < 9; i++) {
-        if (board[i] === null) {
-          board[i] = 'O';
-          const { score } = minimax(board, depth + 1, false);
-          board[i] = null;
-          if (score > bestScore) {
-            bestScore = score;
-            bestMove = i;
-          }
-        }
-      }
-      return { score: bestScore, move: bestMove };
-    } else {
-      let bestScore = Infinity;
-      for (let i = 0; i < 9; i++) {
-        if (board[i] === null) {
-          board[i] = 'X';
-          const { score } = minimax(board, depth + 1, true);
-          board[i] = null;
-          if (score < bestScore) {
-            bestScore = score;
-            bestMove = i;
-          }
-        }
-      }
-      return { score: bestScore, move: bestMove };
-    }
-  }
-
   // Computer move for PVC mode (with difficulty)
   useEffect(() => {
     if (winner || mode !== 'pvc' || currentTurn !== 'O') return;
@@ -136,7 +150,7 @@ function App() {
         setCurrentTurn('X');
       }, 500);
     }
-  }, [mode, currentTurn, state, winner, difficulty, minimax]);
+  }, [mode, currentTurn, state, winner, difficulty]);
 
   const handleBlockClick= (index:number) => {
     if (state[index] !== null || winner) return;
