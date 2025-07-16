@@ -217,15 +217,12 @@ body {
 }
 
 @media (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
   .app-container {
-    padding: 0 8px;
-    height: 100dvh;
-    width: 100vw;
-    min-width: unset;
-    min-height: unset;
-    overflow: hidden;
-    box-sizing: border-box;
-    /* Removed extra bottom padding for non-fixed footer on mobile */
+    padding: 0;
+    overflow-x: hidden;
   }
   .mode-select {
     gap: 2px;
@@ -239,35 +236,39 @@ body {
     margin: 0 2px;
   }
   .board {
-    width: 100%;
-    max-width: 320px;
+    width: 94vw;
+    max-width: 94vw;
     min-width: unset;
     margin-left: auto;
     margin-right: auto;
-    padding: 4px 8px 16px 8px;
+    padding: 4px 0 16px 0;
     border-radius: 10px;
-    margin-bottom: 8px;
     box-sizing: border-box;
-    aspect-ratio: 1 / 1;
-    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+  }
+  .restart-btn {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 12px auto;
+    box-sizing: border-box;
+    display: block;
   }
   .row {
-    gap: 4px;
-    margin-bottom: 4px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    justify-content: center;
+    width: auto;
+    max-width: 100%;
   }
   .block {
-    width: 22vw;
-    height: 22vw;
-    max-width: 90px;
-    max-height: 90px;
-    font-size: 2.5rem;
-    border-radius: 4px;
-    padding: 0;
-    min-width: 44px;
-    min-height: 44px;
+    width: 20vw;
+    height: 20vw;
+    max-width: 80px;
+    max-height: 80px;
+    font-size: 2.2rem;
   }
   .block.win {
     border-color: #ffeb3b;

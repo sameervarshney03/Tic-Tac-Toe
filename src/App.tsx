@@ -95,6 +95,29 @@ function App() {
     drawSound.current.load();
   }, []);
 
+  // Unlock audio on first user interaction (mobile fix)
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (moveSound.current) {
+        moveSound.current.play().then(() => moveSound.current?.pause()).catch(() => {});
+      }
+      if (winSound.current) {
+        winSound.current.play().then(() => winSound.current?.pause()).catch(() => {});
+      }
+      if (drawSound.current) {
+        drawSound.current.play().then(() => drawSound.current?.pause()).catch(() => {});
+      }
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('mousedown', unlockAudio);
+    };
+    window.addEventListener('touchstart', unlockAudio, { once: true });
+    window.addEventListener('mousedown', unlockAudio, { once: true });
+    return () => {
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('mousedown', unlockAudio);
+    };
+  }, []);
+
   // Winner calculation effect
   useEffect(() => {
     const result = checkWinner(state);
