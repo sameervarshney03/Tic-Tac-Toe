@@ -84,11 +84,15 @@ function App() {
     }
     return { winner: null, line: null };
   };
-
+  //For sound preload
   useEffect(() => {
     moveSound.current = new window.Audio(process.env.PUBLIC_URL + '/move.mp3');
     winSound.current = new window.Audio(process.env.PUBLIC_URL + '/win.mp3');
     drawSound.current = new window.Audio(process.env.PUBLIC_URL + '/draw.mp3');
+    // Preload the audio files
+    moveSound.current.load();
+    winSound.current.load();
+    drawSound.current.load();
   }, []);
 
   // Winner calculation effect
@@ -195,7 +199,10 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1 className="headline">Tic - Tac - Toe</h1>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+        <img src={process.env.PUBLIC_URL + '/logo.ico'} alt="Logo" style={{ width: 36, height: 36, marginRight: 12 }} />
+        <h1 className="headline" style={{ margin: 0 }}>x-Tic - Tac - Toe-o</h1>
+      </div>
       <div className="mode-select">
         <button
           className={`mode-btn${mode === 'pvp' ? ' active' : ''}`}
