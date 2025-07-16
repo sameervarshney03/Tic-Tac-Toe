@@ -271,8 +271,7 @@ function App() {
       <footer className="footer">
         Built with ❤️ by <strong>Sameer Varshney</strong>&nbsp;|&nbsp; <a href="https://github.com/sameervarshney03" target="_blank" rel="noopener noreferrer">GITHUB</a>
         &nbsp;|&nbsp;
-        <a href="https://www.linkedin.com/in/sameer-varshney-87102b319" target="_blank" rel="noopener noreferrer">LINKEDIN</a>&nbsp;|&nbsp;
-        <a href="https://drive.google.com/file/d/1kL9KWoAU1RzVDPdl0j9XcLyrnj7QGnbS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
+        <a href="https://www.linkedin.com/in/sameer-varshney-87102b319" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
       </footer>
     </div>
   );
