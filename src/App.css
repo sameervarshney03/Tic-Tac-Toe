@@ -219,7 +219,7 @@ body {
 @media (max-width: 600px) {
   .app-container {
     padding: 0 8px;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     min-width: unset;
     min-height: unset;
@@ -259,9 +259,11 @@ body {
     margin-bottom: 4px;
   }
   .block {
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
+    width: 22vw;
+    height: 22vw;
+    max-width: 90px;
+    max-height: 90px;
+    font-size: 2.5rem;
     border-radius: 4px;
     padding: 0;
     min-width: 44px;

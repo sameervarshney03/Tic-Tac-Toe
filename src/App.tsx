@@ -201,7 +201,8 @@ function App() {
     <div className="app-container">
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
         <img src={process.env.PUBLIC_URL + '/logo.ico'} alt="Logo" style={{ width: 36, height: 36, marginRight: 12 }} />
-        <h1 className="headline" style={{ margin: 0 }}>x-Tic - Tac - Toe-o</h1>
+        <h1 className="headline" style={{ margin: 0 }}>Tic - Tac - Toe</h1>
+        <img src={process.env.PUBLIC_URL + '/logo.ico'} alt="Logo" style={{ width: 36, height: 36, marginLeft: 12 }} />
       </div>
       <div className="mode-select">
         <button
