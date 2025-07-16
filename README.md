@@ -1,7 +1,7 @@
 # Tic-Tac-Toe 🎮
 
 ## 🌐 Live Demo
-[Play Now on Netlify](https://samtictackt.netlify.app)
+[Play Now on Netlify](https://samtictact.netlify.app)
 
 
 ## 🚀 Features
