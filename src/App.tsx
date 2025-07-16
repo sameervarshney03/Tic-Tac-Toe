@@ -108,8 +108,8 @@ function App() {
         drawSound.current.currentTime = 0;
         drawSound.current.play().catch(() => {});
       }
-    } else if (!result.winner && winner) {
-      // Reset winner if board is cleared
+    } else if (!result.winner && winner && state.every(cell => cell === null)) {
+      // Only reset winner if board is cleared (all cells are null)
       setWinner(null);
       setWinningLine(null);
     }
@@ -261,7 +261,7 @@ function App() {
         </div>
       )}
       <footer className="footer">
-        Build with ❤️ by <strong>Sameer Varshney</strong>&nbsp;|&nbsp; <a href="https://github.com/sameervarshney03" target="_blank" rel="noopener noreferrer">GITHUB</a>
+        Built with ❤️ by <strong>Sameer Varshney</strong>&nbsp;|&nbsp; <a href="https://github.com/sameervarshney03" target="_blank" rel="noopener noreferrer">GITHUB</a>
         &nbsp;|&nbsp;
         <a href="https://www.linkedin.com/in/sameer-varshney-87102b319" target="_blank" rel="noopener noreferrer">LINKEDIN</a>&nbsp;|&nbsp;
         <a href="https://drive.google.com/file/d/1kL9KWoAU1RzVDPdl0j9XcLyrnj7QGnbS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a>
